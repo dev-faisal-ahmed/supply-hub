@@ -1,15 +1,18 @@
 import { useNavigate } from 'react-router-dom';
-import { removeToken } from '../utils/helper';
+import { removeToken, successToast } from '../utils/helper';
 import { Logo } from './logo';
 
 export function Navbar() {
   const route = useNavigate();
+
   function handleLogout() {
     removeToken();
+    successToast('Logged out successfully');
     route('/login');
   }
+
   return (
-    <nav className='bg-primary-500 py-3 text-white'>
+    <nav className='bg-primary-500 sticky top-0 z-20 py-3 text-white'>
       <div className='container flex'>
         <Logo />
         <button
