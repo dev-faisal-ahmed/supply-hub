@@ -5,12 +5,14 @@ import { Input } from '../../components/input';
 import { serverReq } from '../../utils/server-req';
 import { serverAddress } from '../../data/server-address';
 import { useNavigate } from 'react-router-dom';
-import { errorToast, successToast } from '../../utils/helper';
+import { errorToast, setToken, successToast } from '../../utils/helper';
 
 export function Login() {
   const path = useNavigate();
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // -------- getting data from form -------- \\
     const form = event.target as HTMLFormElement & {
       username: { value: string };
       password: { value: string };
@@ -20,13 +22,15 @@ export function Login() {
       username: form.username.value.trim(),
       password: form.password.value,
     };
-
+    // -------- api calling -------- \\
     const url = `${serverAddress}/auth/login`;
     try {
       let response: any = await fetch(url, serverReq('POST', loginData));
       response = await response.json();
 
       if (response.email) {
+        // -------- saving user token to local storage after successful login -------- \\
+        setToken(response.token);
         successToast(`Successfully logged in`);
         path('/');
       } else {

@@ -1,8 +1,11 @@
+import { PiShoppingBagFill } from 'react-icons/pi';
 export function Logo() {
   return (
-    <h1 className='text-3xl font-bold'>
-      <span className='text-blue-700'>Supply</span>{' '}
-      <span className='text-sky-700'>Hub</span>
-    </h1>
+    <div className='flex items-center gap-3 font-bold'>
+      <PiShoppingBagFill className='text-xl sm:text-3xl' />
+      <h1 className='text-lg sm:text-2xl'>
+        <span>Supply</span> <span className='text-secondary-500'>Hub</span>
+      </h1>
+    </div>
   );
 }
