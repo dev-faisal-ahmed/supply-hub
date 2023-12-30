@@ -52,7 +52,7 @@ export function PriceFilter({ className }: PriceFilterProps) {
   return (
     <div
       className={twMerge(
-        'sticky top-20 h-full w-full max-w-[250px] rounded-md bg-white p-4',
+        'sticky top-20 h-full w-full max-w-[320px] rounded-md bg-white p-4',
         className,
       )}
     >
