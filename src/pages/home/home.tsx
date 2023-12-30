@@ -49,9 +49,9 @@ export function Home() {
               >
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className='h-full w-fit bg-white p-1'
+                  className='h-full w-fit min-w-[280px] bg-white p-1'
                 >
-                  <PriceFilter className='static h-fit' />
+                  <PriceFilter className='static' />
                 </div>
               </section>
             )}
