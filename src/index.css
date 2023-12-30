@@ -15,9 +15,6 @@ body {
   .container {
     @apply mx-auto w-[95%] max-w-[1280px];
   }
-  .portal {
-    @apply fixed inset-0 z-50 overflow-y-auto;
-  }
   .slider {
     @apply h-2 w-full rounded bg-gray-300;
   }

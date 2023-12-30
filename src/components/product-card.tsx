@@ -36,7 +36,7 @@ export function ProductCard({
   }
 
   return (
-    <div className='flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-lg bg-white'>
+    <div className='flex h-full w-full cursor-pointer flex-col justify-between overflow-hidden rounded-lg bg-white shadow-md'>
       <div className='relative bg-gray-100 p-4'>
         <img
           className='h-40 w-full rounded-md bg-center object-fill transition hover:scale-125'
