@@ -46,33 +46,21 @@ function reducer(state: GlobalStateType, action: ActionType) {
 
     case 'FILTER': {
       const { keyword, max, min } = action.payload;
+      const searchRegex = new RegExp(
+        keyword
+          .split(' ')
+          .filter((key) => key.length >= 2)
+          .join('|'),
+        'i',
+      );
       const tempProducts = state.allProducts.filter(
         (product) =>
-          product.title.toLocaleLowerCase().includes(keyword) &&
+          searchRegex.test(product.title) &&
           product.price >= min &&
           product.price <= max,
       );
       return { ...state, selectedProducts: tempProducts };
     }
-
-    // case 'SEARCH_PRODUCTS': {
-    //   if (action.payload.keyword.trim().length === 0)
-    //     return { ...state, selectedProducts: state.allProducts };
-    //   const tempNewProducts = state.allProducts.filter((product) =>
-    //     product.title
-    //       .toLocaleLowerCase()
-    //       .includes(action.payload.keyword.toLocaleLowerCase()),
-    //   );
-    //   return { ...state, selectedProducts: tempNewProducts };
-    // }
-
-    // case 'FILTER_ON_PRICE': {
-    //   const { min, max } = action.payload;
-    //   const tempProducts = state.selectedProducts.filter(
-    //     (product) => product.price >= min && product.price <= max,
-    //   );
-    //   return { ...state, selectedProducts: tempProducts };
-    // }
 
     case 'RESET_FILTER':
       return {
