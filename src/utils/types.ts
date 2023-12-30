@@ -12,7 +12,6 @@ export type ProductType = {
   images: string[];
 };
 
-export type CartProductType = ProductType;
 export type CartType = {
-  [key: number]: CartProductType;
+  [key: number]: boolean;
 };

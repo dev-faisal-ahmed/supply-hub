@@ -4,8 +4,13 @@ import { twMerge } from 'tailwind-merge';
 import { Input } from '../../components/form/input';
 import { serverReq } from '../../utils/server-req';
 import { serverAddress } from '../../data/server-address';
-import { useNavigate } from 'react-router-dom';
-import { errorToast, setToken, successToast } from '../../utils/helper';
+import { Navigate, useNavigate } from 'react-router-dom';
+import {
+  errorToast,
+  getToken,
+  setToken,
+  successToast,
+} from '../../utils/helper';
 
 export function Login() {
   const path = useNavigate();
@@ -40,6 +45,11 @@ export function Login() {
     } catch (err) {
       errorToast('something went wrong');
     }
+  }
+
+  if (getToken()) {
+    errorToast('You are already logged in');
+    return <Navigate to={'/'} />;
   }
 
   return (

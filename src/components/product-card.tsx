@@ -6,15 +6,19 @@ import {
   MdOutlineStarBorder,
 } from 'react-icons/md';
 import { BsBagPlusFill } from 'react-icons/bs';
+import { TbTrashXFilled } from 'react-icons/tb';
+import { useCart } from '../hooks/use-cart';
 
 export function ProductCard({
-  // id,
+  id,
   title,
   thumbnail,
   price,
   discountPercentage,
   rating,
 }: ProductType) {
+  const { cart, addToCard, removeFromCart } = useCart();
+
   const starCount = {
     fullStar: Math.floor(rating),
     halfStar: Math.ceil(rating) > Math.floor(rating),
@@ -28,21 +32,22 @@ export function ProductCard({
           className='h-40 w-full rounded-md bg-center object-fill transition hover:scale-125'
           src={thumbnail}
         />
-        {discountPercentage ? (
+        {discountPercentage && (
           <div className='absolute left-4 top-4 z-10 rounded-md bg-red-500 p-1 text-xs text-white'>
             -{discountPercentage}%
           </div>
-        ) : null}
+        )}
+        id:{id}{' '}
       </div>
       <div className='p-4'>
         <h2 className='text-lg font-semibold'>{title}</h2>
         <p className='mt-2 font-bold'>
           <span className='text-red-500'>${price}</span>
-          {discountPercentage ? (
+          {discountPercentage && (
             <span className='ml-3 font-semibold text-gray-500 line-through'>
               ${Math.round(price - (price * discountPercentage) / 100)}
             </span>
-          ) : null}
+          )}
         </p>
 
         <div className='mt-2 flex items-center'>
@@ -51,11 +56,11 @@ export function ProductCard({
               <MdOutlineStar />
             </div>
           ))}
-          {starCount.halfStar ? (
+          {starCount.halfStar && (
             <div className='text-orange-300'>
               <MdOutlineStarHalf />
             </div>
-          ) : null}
+          )}
           {[...Array(starCount.emptyStar)].map((el, index) => (
             <div
               key={`${el}-${index + starCount.fullStar}`}
@@ -66,15 +71,30 @@ export function ProductCard({
           ))}
         </div>
       </div>
-      <button
-        className={twMerge(
-          'btn-primary',
-          'mt-5 flex w-full items-center justify-center gap-4 rounded-none bg-primary-700',
-        )}
-      >
-        <BsBagPlusFill className='text-lg' />
-        Add to Cart
-      </button>
+
+      {cart[id] ? (
+        <button
+          onClick={() => removeFromCart(id)}
+          className={twMerge(
+            'btn-primary',
+            'mt-5 flex w-full items-center justify-center gap-4 rounded-none bg-red-700 hover:bg-red-800',
+          )}
+        >
+          <TbTrashXFilled className='text-lg' />
+          Remove From Card
+        </button>
+      ) : (
+        <button
+          onClick={() => addToCard(id)}
+          className={twMerge(
+            'btn-primary',
+            'mt-5 flex w-full items-center justify-center gap-4 rounded-none bg-primary-700',
+          )}
+        >
+          <BsBagPlusFill className='text-lg' />
+          Add to Cart
+        </button>
+      )}
     </div>
   );
 }

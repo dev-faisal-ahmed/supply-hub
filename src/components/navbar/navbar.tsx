@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { removeToken, successToast } from '../../utils/helper';
-import { Logo } from '../logo';
-import { Cart } from './cart/cart';
+import { Logo } from './logo';
+import { Cart } from './cart';
 
 export function Navbar() {
   const route = useNavigate();
