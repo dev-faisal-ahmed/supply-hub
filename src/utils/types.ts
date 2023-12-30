@@ -11,3 +11,8 @@ export type ProductType = {
   thumbnail: string;
   images: string[];
 };
+
+export type CartProductType = ProductType;
+export type CartType = {
+  [key: number]: CartProductType;
+};
