@@ -10,9 +10,12 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 cursor-pointer rounded-md px-5 py-2 font-semibold text-white transition hover:scale-105;
+    @apply cursor-pointer rounded-md bg-primary-600 px-5 py-2 font-semibold text-white transition hover:scale-105 hover:bg-primary-700;
   }
   .container {
     @apply mx-auto w-[90%] max-w-[1280px];
+  }
+  .portal {
+    @apply fixed inset-0 z-50 overflow-y-auto;
   }
 }

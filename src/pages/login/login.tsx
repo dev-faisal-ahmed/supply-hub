@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormEvent } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { Input } from '../../components/input';
+import { Input } from '../../components/form/input';
 import { serverReq } from '../../utils/server-req';
 import { serverAddress } from '../../data/server-address';
 import { useNavigate } from 'react-router-dom';

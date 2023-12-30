@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Navigate } from 'react-router-dom';
 import { getToken } from '../../utils/helper';
-import { Navbar } from '../../components/navbar';
+import { Navbar } from '../../components/navbar/navbar';
 import { useGetProducts } from '../../hooks/use-get-products';
 import { useEffect } from 'react';
 import { ProductCard } from '../../components/product-card';
