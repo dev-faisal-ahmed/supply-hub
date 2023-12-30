@@ -92,7 +92,7 @@ export function ProductCard({
           )}
         >
           <TbTrashXFilled className='text-lg' />
-          Remove From Card
+          Remove From Cart
         </button>
       ) : (
         <button
