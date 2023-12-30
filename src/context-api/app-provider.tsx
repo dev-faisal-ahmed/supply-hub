@@ -18,7 +18,7 @@ type ActionType =
   | { type: 'UPDATE_SELECTED_PRODUCTS'; payload: ProductType[] }
   | { type: 'ADD_TO_CART'; payload: { id: number } }
   | { type: 'REMOVE_FROM_CART'; payload: { id: number } }
-  | { type: 'SEARCH_PRODUCTS'; payload: { keyword: string } }
+  | { type: 'FILTER'; payload: { keyword: string; min: number; max: number } }
   | { type: 'RESET_FILTER' };
 
 function reducer(state: GlobalStateType, action: ActionType) {
@@ -44,16 +44,35 @@ function reducer(state: GlobalStateType, action: ActionType) {
       };
     }
 
-    case 'SEARCH_PRODUCTS': {
-      if (action.payload.keyword.trim().length === 0)
-        return { ...state, selectedProducts: state.allProducts };
-      const tempNewProducts = state.allProducts.filter((product) =>
-        product.title
-          .toLocaleLowerCase()
-          .includes(action.payload.keyword.toLocaleLowerCase()),
+    case 'FILTER': {
+      const { keyword, max, min } = action.payload;
+      const tempProducts = state.allProducts.filter(
+        (product) =>
+          product.title.toLocaleLowerCase().includes(keyword) &&
+          product.price >= min &&
+          product.price <= max,
       );
-      return { ...state, selectedProducts: tempNewProducts };
+      return { ...state, selectedProducts: tempProducts };
     }
+
+    // case 'SEARCH_PRODUCTS': {
+    //   if (action.payload.keyword.trim().length === 0)
+    //     return { ...state, selectedProducts: state.allProducts };
+    //   const tempNewProducts = state.allProducts.filter((product) =>
+    //     product.title
+    //       .toLocaleLowerCase()
+    //       .includes(action.payload.keyword.toLocaleLowerCase()),
+    //   );
+    //   return { ...state, selectedProducts: tempNewProducts };
+    // }
+
+    // case 'FILTER_ON_PRICE': {
+    //   const { min, max } = action.payload;
+    //   const tempProducts = state.selectedProducts.filter(
+    //     (product) => product.price >= min && product.price <= max,
+    //   );
+    //   return { ...state, selectedProducts: tempProducts };
+    // }
 
     case 'RESET_FILTER':
       return {

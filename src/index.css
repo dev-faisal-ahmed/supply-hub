@@ -18,4 +18,26 @@ body {
   .portal {
     @apply fixed inset-0 z-50 overflow-y-auto;
   }
+  .slider {
+    @apply h-2 w-full rounded bg-gray-300;
+  }
+  .slider .thumb {
+    @apply -top-1 h-4 w-4 cursor-grab rounded-full border border-primary-600 bg-primary-600;
+  }
+  .slider .track-1 {
+    @apply h-2 bg-primary-400;
+  }
+}
+
+input[type='number'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* border: none; */
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

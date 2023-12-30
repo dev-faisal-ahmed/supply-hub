@@ -43,7 +43,7 @@ export function ProductCard({
           src={thumbnail}
         />
         {discountPercentage && (
-          <div className='absolute left-4 top-4 z-10 rounded-md bg-red-500 p-1 text-xs text-white'>
+          <div className='absolute left-4 top-4 z-10 rounded-md bg-red-600 p-1 text-xs text-white'>
             -{discountPercentage}%
           </div>
         )}
@@ -52,7 +52,7 @@ export function ProductCard({
       <div className='p-4'>
         <h2 className='text-lg font-semibold'>{title}</h2>
         <p className='mt-2 font-bold'>
-          <span className='text-red-500'>${price}</span>
+          <span className='text-red-600'>${price}</span>
           {discountPercentage && (
             <span className='ml-3 font-semibold text-gray-500 line-through'>
               ${Math.round(price - (price * discountPercentage) / 100)}
