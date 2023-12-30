@@ -1,14 +1,17 @@
 import { RiShoppingCart2Fill } from 'react-icons/ri';
-import { useCart } from '../../hooks/use-cart';
+import { useAppContext } from '../../hooks/use-app-context';
 
 export function Cart() {
-  const { cart } = useCart();
+  const {
+    state: { cart },
+  } = useAppContext();
+  // const { cart } = useCart();
 
   return (
-    <div className='relative text-3xl'>
-      <RiShoppingCart2Fill />
+    <div className='relative cursor-pointer'>
+      <RiShoppingCart2Fill className='text-xl sm:text-3xl' />
       {Object.keys(cart).length > 0 && (
-        <span className='absolute -top-3 left-3 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-xs text-white'>
+        <span className='absolute -top-2 left-3 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white sm:-top-3 sm:h-6 sm:w-6'>
           {Object.keys(cart).length}
         </span>
       )}

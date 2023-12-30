@@ -1,20 +1,23 @@
 import { useState } from 'react';
 import { serverAddress } from '../data/server-address';
 import { errorToast } from '../utils/helper';
-import { ProductType } from '../utils/types';
+import { useAppContext } from './use-app-context';
 
 export function useGetProducts() {
   const [loading, setLoading] = useState(false);
-  const [products, setProducts] = useState<ProductType[]>([]);
-  const url = `${serverAddress}/products`;
+  const { dispatch } = useAppContext();
 
   function getProducts() {
+    const url = `${serverAddress}/products`;
+    setLoading(true);
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setProducts(data.products))
+      .then((data) =>
+        dispatch({ type: 'UPDATE_ALL_PRODUCTS', payload: data.products }),
+      )
       .then(() => setLoading(false))
       .catch(() => errorToast(`Something went wrong`));
   }
 
-  return { products, loading, getProducts };
+  return { loading, getProducts };
 }

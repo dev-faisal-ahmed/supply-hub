@@ -7,23 +7,33 @@ import {
 } from 'react-icons/md';
 import { BsBagPlusFill } from 'react-icons/bs';
 import { TbTrashXFilled } from 'react-icons/tb';
-import { useCart } from '../hooks/use-cart';
+import { useAppContext } from '../hooks/use-app-context';
 
 export function ProductCard({
   id,
-  title,
-  thumbnail,
   price,
-  discountPercentage,
+  title,
   rating,
+  thumbnail,
+  discountPercentage,
 }: ProductType) {
-  const { cart, addToCard, removeFromCart } = useCart();
-
+  const {
+    state: { cart },
+    dispatch,
+  } = useAppContext();
   const starCount = {
     fullStar: Math.floor(rating),
     halfStar: Math.ceil(rating) > Math.floor(rating),
     emptyStar: 5 - Math.ceil(rating),
   };
+
+  function addToCart() {
+    dispatch({ type: 'ADD_TO_CART', payload: { id } });
+  }
+
+  function removeFromCart() {
+    dispatch({ type: 'REMOVE_FROM_CART', payload: { id } });
+  }
 
   return (
     <div className='flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-lg bg-white'>
@@ -37,8 +47,8 @@ export function ProductCard({
             -{discountPercentage}%
           </div>
         )}
-        id:{id}{' '}
       </div>
+      {/* card body */}
       <div className='p-4'>
         <h2 className='text-lg font-semibold'>{title}</h2>
         <p className='mt-2 font-bold'>
@@ -72,9 +82,10 @@ export function ProductCard({
         </div>
       </div>
 
+      {/* cart */}
       {cart[id] ? (
         <button
-          onClick={() => removeFromCart(id)}
+          onClick={removeFromCart}
           className={twMerge(
             'btn-primary',
             'mt-5 flex w-full items-center justify-center gap-4 rounded-none bg-red-700 hover:bg-red-800',
@@ -85,7 +96,7 @@ export function ProductCard({
         </button>
       ) : (
         <button
-          onClick={() => addToCard(id)}
+          onClick={addToCart}
           className={twMerge(
             'btn-primary',
             'mt-5 flex w-full items-center justify-center gap-4 rounded-none bg-primary-700',

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export type ProductType = {
   id: number;
   title: string;
@@ -14,4 +16,8 @@ export type ProductType = {
 
 export type CartType = {
   [key: number]: boolean;
+};
+
+export type WrapperType = {
+  children: ReactNode;
 };

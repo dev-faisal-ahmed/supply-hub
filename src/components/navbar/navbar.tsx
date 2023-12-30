@@ -1,7 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import { removeToken, successToast } from '../../utils/helper';
-import { Logo } from './logo';
 import { Cart } from './cart';
+import { Logo } from './logo';
+import { useNavigate } from 'react-router-dom';
+import { SearchDesktop } from './search/search-desktop';
+import { removeToken, successToast } from '../../utils/helper';
 
 export function Navbar() {
   const route = useNavigate();
@@ -16,6 +17,7 @@ export function Navbar() {
     <nav className='sticky top-0 z-20 bg-primary-500 py-3 text-white'>
       <div className='container flex items-center gap-5'>
         <Logo />
+        <SearchDesktop />
         <div className='ml-auto' />
         <Cart />
         <button
