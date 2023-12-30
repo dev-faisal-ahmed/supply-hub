@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { getToken } from '../../utils/helper';
-import { useGetProducts } from '../../hooks/use-get-products';
-import { useEffect } from 'react';
-import { ProductCard } from '../../components/product-card';
 import { Loader } from '../../components/loader';
+import { ProductCard } from '../../components/product-card';
 import { useAppContext } from '../../hooks/use-app-context';
+import { useGetProducts } from '../../hooks/use-get-products';
 
 export function Home() {
   const { loading, getProducts } = useGetProducts();
   const {
-    state: { allProducts },
+    state: { selectedProducts },
   } = useAppContext();
 
   useEffect(() => {
@@ -30,8 +30,8 @@ export function Home() {
 
   return (
     <section className='container grid grid-cols-1 gap-5 py-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-      {allProducts && allProducts.length > 0 ? (
-        allProducts.map((product) => (
+      {selectedProducts && selectedProducts.length > 0 ? (
+        selectedProducts.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))
       ) : (

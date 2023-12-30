@@ -14,7 +14,7 @@ export function Navbar() {
   }
 
   return (
-    <nav className='sticky top-0 z-20 bg-primary-500 py-3 text-white'>
+    <nav className='sticky top-0 z-20 bg-primary-700 py-3 text-white'>
       <div className='container flex items-center gap-5'>
         <Logo />
         <SearchDesktop />

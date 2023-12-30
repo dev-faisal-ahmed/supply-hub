@@ -10,13 +10,15 @@ export function useGetProducts() {
   function getProducts() {
     const url = `${serverAddress}/products`;
     setLoading(true);
+
     fetch(url)
       .then((res) => res.json())
-      .then((data) =>
-        dispatch({ type: 'UPDATE_ALL_PRODUCTS', payload: data.products }),
-      )
-      .then(() => setLoading(false))
-      .catch(() => errorToast(`Something went wrong`));
+      .then((data) => {
+        dispatch({ type: 'UPDATE_ALL_PRODUCTS', payload: data.products });
+        dispatch({ type: 'UPDATE_SELECTED_PRODUCTS', payload: data.products });
+      })
+      .catch(() => errorToast(`Something went wrong`))
+      .finally(() => setLoading(false));
   }
 
   return { loading, getProducts };
