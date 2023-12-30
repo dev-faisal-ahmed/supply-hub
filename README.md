@@ -7,7 +7,9 @@
 - React-Router-Dom
 - React-Slider
 
-  ### Features:
+
+
+### Features:
   - Add to Cart
   - Remove From Cart
   - Filter Based on Price
