@@ -57,7 +57,7 @@ export function Login() {
       <div className='hidden h-full w-[70%] bg-red-50 md:block'>
         <img
           className='h-full w-full object-cover'
-          src='/public/images/login.jpg'
+          src='./images/login.jpg'
         />
       </div>
       <div className='flex h-full flex-grow items-center justify-center bg-white p-8'>
